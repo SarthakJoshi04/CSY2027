@@ -7,8 +7,8 @@
     <title>Woodland</title>
 </head>
 <body>
-    <header>
-        <img class="logo" src="/Images/uni_logo.png" alt="Logo">
+    <header class="index-header">
+        <img class="logo" src="/Images/Uni-logo.png" alt="Logo">
         <nav>
             <ul class="nav__links">
             <li><a href="index.php">HOME</a></li>
@@ -18,7 +18,7 @@
             <li><a href="contact.php">CONTACT</a></li>
             </ul>
         </nav>
-        <a class="cta" href="login.php"><button>LOGIN</button></a>
+        <a class="cta" href="student_login.php"><button>LOGIN</button></a>
     </header>
 
 <main><h>This is our body</h></main>
@@ -31,10 +31,10 @@
             <div class="footer-center">
                 <nav>
                     <ul>
-                        <li><a href="#">HOME</a></li>
-                        <li><a href="#">ACADEMICS</a></li>
-                        <li><a href="#">STUDENTS</a></li>
-                        <li><a href="#">FACULTY</a></li>
+                        <li><a href="index.php">HOME</a></li>
+                        <li><a href="academics.php">ACADEMICS</a></li>
+                        <li><a href="students.php">STUDENTS</a></li>
+                        <li><a href="faculty.php">FACULTY</a></li>
                     </ul>
                 </nav>
             </div>

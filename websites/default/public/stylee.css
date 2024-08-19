@@ -125,7 +125,7 @@ button{
     text-decoration: none;
     
 }
-header {
+.index-header {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -272,4 +272,354 @@ footer {
     width: 30px;
     height: 30px;
     margin-bottom: 10px;
+}
+
+/* student login */
+
+.login_body {
+    background-color: #E5E5CB;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align containers to the left */
+    height: 100vh;
+    margin: 0;
+    padding-left: 20px; /* Padding for space on the left */
+    font-family: Arial, sans-serif;
+}
+
+.right-container {
+    margin-left: 90px;
+    margin-right: 190px; /* Space on the right */
+    height: 50vh;
+    width: 25%;
+    position: relative;
+    margin-top: -30px; /* Adjusted margin to pull upwards */
+}
+
+.stubbler {
+    background-color: #D5CEA3;
+    padding: 20px;
+    height: 100%; /* Full height */
+    width: 92%; /* Full width */
+    position: absolute;
+    right: -37px;
+    top: 40px;
+}
+
+.right-content {
+    background: url('Images/student.png') no-repeat center center; /* Image background */
+    background-size: cover; /* Cover the entire div */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    position: relative;
+    z-index: 1; /* Place above stubbler */
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55vh;
+    width: 25%;
+    position: relative;
+}
+
+.stubble {
+    background-color: #3C2A21;
+    padding: 20px;
+    border-radius: 35px;
+    height: 110%; /* Full height */
+    width: 92%; /* Full width */
+    position: absolute;
+    right: -37px;
+    top: 20px;
+}
+
+.login-form {
+    background-color: #D5CEA3;
+    padding: 30px;
+    border-radius: 35px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 110%; /* Full height */
+    width: 100%; /* Full width */
+    z-index: 1; /* Place on top */
+}
+
+.login-form h2 {
+    margin: 0 0 25px; /* Space below h2 */
+    color: #333;
+    text-align: center;
+}
+
+.login-form input {
+    width: 90%;
+    padding: 15px; /* More height */
+    margin: 10px 5px 20px 5px; /* Space below input boxes */
+    border: none;
+    border-radius: 30px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1.2em;
+}
+
+.login-form button {
+    width: 50%;
+    padding: 25px; /* More height */
+    background-color: #4A403A;
+    color: #FFF;
+    border: none;
+    position: absolute;
+    left: 80px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 0.8em; /* Reduced font size */
+    margin-top: 30px;
+}
+
+.login-form button:hover {
+    background-color: #333;
+}
+
+.forgot-password {
+    display: block;
+    margin: 10px 0;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.staff-login {
+    display: block;
+    margin-top: 130px;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.staff-login:hover {
+    text-decoration: underline;
+}
+
+/* staff_login */
+
+.staff_login {
+    background-color: #E5E5CB;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align containers to the left */
+    height: 100vh;
+    margin: 0;
+    padding-left: 20px; /* Padding for space on the left */
+    font-family: Arial, sans-serif;
+  }
+  
+  .login-container-staff {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 150px; /* Space on the left */
+    height: 50vh;
+    width: 25%;
+    position: relative;
+    margin-top: -30px; /* Adjusted margin to pull upwards */
+  }
+  
+  .stubble-staff {
+    background-color: #3C2A21;
+    padding: 20px;
+    border-radius: 35px;
+    height: 110%; /* Full height */
+    width: 92%; /* Full width */
+    position: absolute;
+    right: -37px;
+    top: 20px;
+  }
+  
+  .login-form-staff {
+    background-color: #D5CEA3;
+    padding: 10px;
+    border-radius: 35px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 110%; /* Full height */
+    width: 100%; /* Full width */
+    z-index: 1; /* Place on top */
+  }
+  
+  .login-form-staff h2 {
+    margin: 0 0 25px; /* Space below h2 */
+    color: #333;
+    text-align: center;
+  }
+  
+  .login-form-staff input {
+    width: 90%;
+    padding: 15px; /* More height */
+    margin: 10px 5px 20px 5px; /* Space below input boxes */
+    border: none;
+    border-radius: 30px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1.2em;
+  }
+  
+  .login-form-staff button {
+    width: 50%;
+    padding: 25px; /* More height */
+    background-color: #4A403A;
+    color: #FFF;
+    border: none;
+    position: absolute;
+    left: 80px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 0.8em; /* Reduced font size */
+    margin-top: 30px;
+  }
+  
+  .login-form-staff button:hover {
+    background-color: #333;
+  }
+  
+  .forgot-password-staff {
+    display: block;
+    margin: 10px 0;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9em;
+    text-align: center;
+  }
+  
+  .forgot-password-staff:hover {
+    text-decoration: underline;
+  }
+  
+  .right-container-staff {
+    margin-left: 250px; /* Space between the login-container and right-container */
+    height: 50vh;
+    width: 25%;
+    position: relative; /* Position relative for stubbler */
+  }
+  
+  .stubbler-staff {
+    background-color: #D5CEA3;
+    padding: 20px;
+    height: 90%; /* Full height */
+    width: 92%; /* Full width */
+    position: absolute;
+    right: -37px;
+    top: 40px;
+  }
+  
+  .right-content-staff {
+    background: url('Images/staff.png') no-repeat center center; /* Image background */
+    background-size: cover; /* Cover the entire div */
+    width: 100%; /* Full width */
+    height: 90%; /* Full height */
+    position: relative;
+    z-index: 1; /* Place above stubbler */
+  }
+  .student-login {
+    display: block;
+    margin-top: 120px;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.student-login:hover {
+    text-decoration: underline;
+}
+
+
+/* admin dashbord */
+  
+.admin-body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #eee;
+}
+
+.sidebar {
+    width: 15%;
+    height: 100vh;
+    background-color: #483E26;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+}
+
+.sidebar-header {
+    background-color: #B6B69D;
+    padding: 50px;
+    text-align: right;
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 2.5em;
+    color: #483E26;
+    padding-left: 30%;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+}
+
+.sidebar-menu li {
+    padding: 20px 10px;
+    font-size: 1.2em;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-menu li a {
+    text-decoration: none;
+    color: #FFF;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+}
+
+.sidebar-menu li a:hover {
+    background-color: #6B5E4E;
+}
+
+.main-content {
+    margin-left: 15%;
+    padding: 20px 10px;
+    height: 100vh;
+    background-color: #E8E6CE;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: none ;
+}
+
+.admin-header h1 {
+    font-size: 2.5em;
+    color: black;
+    margin: 0;
+    
+}
+
+.admin_logo img {
+    width: 250px;
+    height: auto;
 }
