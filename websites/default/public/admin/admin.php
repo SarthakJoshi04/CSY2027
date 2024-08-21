@@ -12,7 +12,7 @@
             <h2>ADMIN</h2>
         </div>
         <ul class="sidebar-menu">
-            <li><a href="#">Student Record</a></li>
+            <li><a href="studentrecord.php">Student Record</a></li>
             <li><a href="#">Staff Record</a></li>
             <li><a href="#">Course Record</a></li>
             <li><a href="#">Module Record</a></li>
