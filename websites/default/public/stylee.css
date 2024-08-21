@@ -145,12 +145,54 @@ button{
 
 }
 .nav__links li a{
-    transition: all 0.3s ease 0s;
+    text-decoration: none;
+    color: #000; /* Adjust the color as per your theme */
+    
+    padding: 10px;
+    position: relative;
+    display: inline-block;
 }
 .nav__links li a:hover{
-    color: rgb(6, 18, 18);
-    font-weight: 600;
+    color: #3a2c1a;
 }
+
+nav ul li a:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #3a2c1a; /* Adjust the underline color as needed */
+    transition: all 3s ease;
+}
+
+
+
+
+/* Active State with Triangle Facing Right */
+nav ul li.active a::after {
+    content: '';
+    position: absolute;
+    left: -10px; /* Positioning on the left side */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #3a2c1a; /* Color of the triangle */
+}
+
+/* Positioning Adjustment for Active Link */
+nav ul li.active a {
+    position: relative;
+}
+
+
+
+
+
 button {
     padding: 9px 25px;
     background-color:rgb(26,18,11);
@@ -307,7 +349,7 @@ footer {
 }
 
 .right-content {
-    background: url('Images/student.png') no-repeat center center; /* Image background */
+    background: url('images/student.png') no-repeat center center; /* Image background */
     background-size: cover; /* Cover the entire div */
     width: 100%; /* Full width */
     height: 100%; /* Full height */
@@ -515,7 +557,7 @@ footer {
   }
   
   .right-content-staff {
-    background: url('Images/staff.png') no-repeat center center; /* Image background */
+    background: url('images/staff.png') no-repeat center center; /* Image background */
     background-size: cover; /* Cover the entire div */
     width: 100%; /* Full width */
     height: 90%; /* Full height */

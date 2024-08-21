@@ -25,7 +25,7 @@
         <header   class="admin-header">
             <h1>Dashboard</h1>
             <div class="admin_logo">
-                <img src="/Images/Uni-logo.png" alt="Woodland University College Logo">
+                <img src="/images/Uni-logo.png" alt="Woodland University College Logo">
             </div>
         </header>
     </div>
