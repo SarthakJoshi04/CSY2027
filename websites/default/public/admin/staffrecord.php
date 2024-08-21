@@ -59,17 +59,9 @@ $query = "SELECT * FROM staff";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $staff = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Records</title>
-    <link rel="stylesheet" href="../stylee.css">
-</head>
-<body>
+// Set the content for this page
+$content = '
     <h1>Staff Records</h1>
     <form method="POST">
         <input type="text" name="firstname" placeholder="First Name" required>
@@ -86,19 +78,25 @@ $staff = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Email</th>
             <th>Username</th>
             <th>Actions</th>
-        </tr>
-        <?php foreach ($staff as $row) { ?>
+        </tr>';
+
+foreach ($staff as $row) {
+    $content .= '
         <tr>
-            <td><?php echo htmlspecialchars($row['firstname']); ?></td>
-            <td><?php echo htmlspecialchars($row['lastname']); ?></td>
-            <td><?php echo htmlspecialchars($row['email']); ?></td>
-            <td><?php echo htmlspecialchars($row['username']); ?></td>
+            <td>' . htmlspecialchars($row['firstname']) . '</td>
+            <td>' . htmlspecialchars($row['lastname']) . '</td>
+            <td>' . htmlspecialchars($row['email']) . '</td>
+            <td>' . htmlspecialchars($row['username']) . '</td>
             <td>
-                <a href="staffrecord.php?edit=<?php echo htmlspecialchars($row['id']); ?>">Edit</a>
-                <a href="staffrecord.php?delete=<?php echo htmlspecialchars($row['id']); ?>">Delete</a>
+                <a href="staffrecord.php?edit=' . htmlspecialchars($row['id']) . '">Edit</a>
+                <a href="staffrecord.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
             </td>
-        </tr>
-        <?php } ?>
-    </table>
-</body>
-</html>
+        </tr>';
+}
+
+$content .= '
+    </table>';
+
+// Include the admin layout
+include 'admin_layout.php';
+?>

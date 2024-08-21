@@ -48,17 +48,9 @@ $query = "SELECT * FROM assignments";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $assignments = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignments</title>
-    <link rel="stylesheet" href="../stylee.css">
-</head>
-<body>
+// Set the content for this page
+$content = '
     <h1>Assignments</h1>
     <form method="POST">
         <input type="text" name="title" placeholder="Assignment Title" required>
@@ -72,18 +64,24 @@ $assignments = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Description</th>
             <th>Due Date</th>
             <th>Actions</th>
-        </tr>
-        <?php foreach ($assignments as $row) { ?>
+        </tr>';
+
+foreach ($assignments as $row) {
+    $content .= '
         <tr>
-            <td><?php echo htmlspecialchars($row['assignment_title']); ?></td>
-            <td><?php echo htmlspecialchars($row['description']); ?></td>
-            <td><?php echo htmlspecialchars($row['due_date']); ?></td>
+            <td>' . htmlspecialchars($row['assignment_title']) . '</td>
+            <td>' . htmlspecialchars($row['description']) . '</td>
+            <td>' . htmlspecialchars($row['due_date']) . '</td>
             <td>
-                <a href="assignment.php?edit=<?php echo htmlspecialchars($row['id']); ?>">Edit</a>
-                <a href="assignment.php?delete=<?php echo htmlspecialchars($row['id']); ?>">Delete</a>
+                <a href="assignment.php?edit=' . htmlspecialchars($row['id']) . '">Edit</a>
+                <a href="assignment.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
             </td>
-        </tr>
-        <?php } ?>
-    </table>
-</body>
-</html>
+        </tr>';
+}
+
+$content .= '
+    </table>';
+
+// Include the admin layout
+include 'admin_layout.php';
+?>

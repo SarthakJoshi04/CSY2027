@@ -46,17 +46,9 @@ $query = "SELECT * FROM attendance";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $attendances = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance</title>
-    <link rel="stylesheet" href="../stylee.css">
-</head>
-<body>
+// Set the content for this page
+$content = '
     <h1>Attendance</h1>
     <form method="POST">
         <input type="number" name="student_id" placeholder="Student ID" required>
@@ -75,19 +67,25 @@ $attendances = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Date</th>
             <th>Status</th>
             <th>Actions</th>
-        </tr>
-        <?php foreach ($attendances as $row) { ?>
+        </tr>';
+
+foreach ($attendances as $row) {
+    $content .= '
         <tr>
-            <td><?php echo htmlspecialchars($row['student_id']); ?></td>
-            <td><?php echo htmlspecialchars($row['course_id']); ?></td>
-            <td><?php echo htmlspecialchars($row['date']); ?></td>
-            <td><?php echo htmlspecialchars($row['status']); ?></td>
+            <td>' . htmlspecialchars($row['student_id']) . '</td>
+            <td>' . htmlspecialchars($row['course_id']) . '</td>
+            <td>' . htmlspecialchars($row['date']) . '</td>
+            <td>' . htmlspecialchars($row['status']) . '</td>
             <td>
-                <a href="attendance.php?edit=<?php echo htmlspecialchars($row['id']); ?>">Edit</a>
-                <a href="attendance.php?delete=<?php echo htmlspecialchars($row['id']); ?>">Delete</a>
+                <a href="attendance.php?edit=' . htmlspecialchars($row['id']) . '">Edit</a>
+                <a href="attendance.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
             </td>
-        </tr>
-        <?php } ?>
-    </table>
-</body>
-</html>
+        </tr>';
+}
+
+$content .= '
+    </table>';
+
+// Include the admin layout
+include 'admin_layout.php';
+?>

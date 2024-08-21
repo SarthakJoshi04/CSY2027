@@ -48,17 +48,9 @@ $query = "SELECT * FROM modules";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modules</title>
-    <link rel="stylesheet" href="../stylee.css">
-</head>
-<body>
+// Set the content for this page
+$content = '
     <h1>Modules</h1>
     <form method="POST">
         <input type="text" name="module_name" placeholder="Module Name" required>
@@ -72,18 +64,24 @@ $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Description</th>
             <th>Course ID</th>
             <th>Actions</th>
-        </tr>
-        <?php foreach ($modules as $row) { ?>
+        </tr>';
+
+foreach ($modules as $row) {
+    $content .= '
         <tr>
-            <td><?php echo htmlspecialchars($row['module_name']); ?></td>
-            <td><?php echo htmlspecialchars($row['description']); ?></td>
-            <td><?php echo htmlspecialchars($row['course_id']); ?></td>
+            <td>' . htmlspecialchars($row['module_name']) . '</td>
+            <td>' . htmlspecialchars($row['description']) . '</td>
+            <td>' . htmlspecialchars($row['course_id']) . '</td>
             <td>
-                <a href="module_record.php?edit=<?php echo htmlspecialchars($row['id']); ?>">Edit</a>
-                <a href="module_record.php?delete=<?php echo htmlspecialchars($row['id']); ?>">Delete</a>
+                <a href="module_record.php?edit=' . htmlspecialchars($row['id']) . '">Edit</a>
+                <a href="module_record.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
             </td>
-        </tr>
-        <?php } ?>
-    </table>
-</body>
-</html>
+        </tr>';
+}
+
+$content .= '
+    </table>';
+
+// Include the admin layout
+include 'admin_layout.php';
+?>

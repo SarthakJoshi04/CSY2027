@@ -44,17 +44,9 @@ $query = "SELECT * FROM courses";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses</title>
-    <link rel="stylesheet" href="../stylee.css">
-</head>
-<body>
+// Set the content for this page
+$content = '
     <h1>Courses</h1>
     <form method="POST">
         <input type="text" name="course_name" placeholder="Course Name" required>
@@ -66,17 +58,23 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Course Name</th>
             <th>Description</th>
             <th>Actions</th>
-        </tr>
-        <?php foreach ($courses as $row) { ?>
+        </tr>';
+
+foreach ($courses as $row) {
+    $content .= '
         <tr>
-            <td><?php echo htmlspecialchars($row['course_name']); ?></td>
-            <td><?php echo htmlspecialchars($row['description']); ?></td>
+            <td>' . htmlspecialchars($row['course_name']) . '</td>
+            <td>' . htmlspecialchars($row['description']) . '</td>
             <td>
-                <a href="course_record.php?edit=<?php echo htmlspecialchars($row['id']); ?>">Edit</a>
-                <a href="course_record.php?delete=<?php echo htmlspecialchars($row['id']); ?>">Delete</a>
+                <a href="course_record.php?edit=' . htmlspecialchars($row['id']) . '">Edit</a>
+                <a href="course_record.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
             </td>
-        </tr>
-        <?php } ?>
-    </table>
-</body>
-</html>
+        </tr>';
+}
+
+$content .= '
+    </table>';
+
+// Include the admin layout
+include 'admin_layout.php';
+?>
