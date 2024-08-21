@@ -12,12 +12,12 @@
             <h2>ADMIN</h2>
         </div>
         <ul class="sidebar-menu">
-            <li><a href="#">Student Record</a></li>
-            <li><a href="#">Staff Record</a></li>
-            <li><a href="#">Course Record</a></li>
-            <li><a href="#">Module Record</a></li>
-            <li><a href="#">Assignments</a></li>
-            <li><a href="#">Attendance</a></li>
+            <li><a href="studentrecord.php">Student Record</a></li>
+            <li><a href="staffrecord.php">Staff Record</a></li>
+            <li><a href="course_record.php">Course Record</a></li>
+            <li><a href="module_record.php">Module Record</a></li>
+            <li><a href="assignment.php">Assignments</a></li>
+            <li><a href="attendance.php">Attendance</a></li>
             <li><a href="#">Logout</a></li>
         </ul>
     </div>
