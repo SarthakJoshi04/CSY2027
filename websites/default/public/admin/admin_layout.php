@@ -1,3 +1,4 @@
+<!-- admin_layout.php -->
 <?php
 $pageTitle = "Dashboard";
 $activePage = basename($_SERVER['PHP_SELF']);
@@ -9,6 +10,37 @@ $activePage = basename($_SERVER['PHP_SELF']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../stylee.css">
     <title><?php echo $pageTitle; ?></title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('#searchButton').addEventListener('click', function() {
+                let searchTerm = document.querySelector('#searchInput').value;
+                if (searchTerm.length > 2) {
+                    window.location.href = `search_result.php?query=${encodeURIComponent(searchTerm)}`;
+                } else {
+                    alert('Please enter at least 3 characters.');
+                }
+            });
+
+            document.querySelector('#searchInput').addEventListener('input', function() {
+                let searchTerm = this.value;
+                if (searchTerm.length > 2) {
+                    fetch(`autocomplete.php?term=${encodeURIComponent(searchTerm)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            let suggestionsList = document.querySelector('#suggestions');
+                            suggestionsList.innerHTML = '';
+
+                            data.forEach(item => {
+                                let listItem = document.createElement('li');
+                                listItem.textContent = item;
+                                suggestionsList.appendChild(listItem);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching autocomplete data:', error));
+                }
+            });
+        });
+    </script>
 </head>
 <body class="admin-body">
     <div class="sidebar">
@@ -42,7 +74,12 @@ $activePage = basename($_SERVER['PHP_SELF']);
         <header class="admin-header">
             <h1><?php echo $pageTitle; ?></h1>
             <div class="admin_logo">
-                <img src="/images/Uni-logo.png" alt="Woodland University College Logo">
+                <img src="../images/Uni-logo.png" alt="Woodland University College Logo">
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <button id="searchButton">Search</button>
+                <ul id="suggestions"></ul>
             </div>
         </header>
 

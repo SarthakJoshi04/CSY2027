@@ -1,3 +1,4 @@
+<!-- studentrecord.php -->
 <?php
 // Include database connection
 include '../dbconnection.php';
@@ -5,24 +6,6 @@ include '../dbconnection.php';
 // Create a new instance of DatabaseConnection
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
-
-// Handle Create
-if (isset($_POST['create'])) {
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
-    $query = "INSERT INTO students (firstname, lastname, email, username, password) VALUES (:firstname, :lastname, :email, :username, :password)";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(':firstname', $firstname);
-    $stmt->bindParam(':lastname', $lastname);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':password', $password);
-    $stmt->execute();
-}
 
 // Handle Update
 if (isset($_POST['update'])) {
@@ -55,7 +38,7 @@ if (isset($_GET['delete'])) {
 }
 
 // Fetch students
-$query = "SELECT * FROM students";
+$query = "SELECT * FROM students WHERE is_archived = 0";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -63,14 +46,7 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // Set the content for this page
 $content = '
     <h1>Student Records</h1>
-    <form method="POST">
-        <input type="text" name="firstname" placeholder="First Name" required>
-        <input type="text" name="lastname" placeholder="Last Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit" name="create">Add Student</button>
-    </form>
+    <a href="addstudent.php" class="button">Add Student</a>
     <table>
         <tr>
             <th>First Name</th>
@@ -88,14 +64,17 @@ foreach ($students as $row) {
             <td>' . htmlspecialchars($row['email']) . '</td>
             <td>' . htmlspecialchars($row['username']) . '</td>
             <td>
-                <a href="studentrecord.php?edit=' . htmlspecialchars($row['id']) . '">Edit</a>
+                <a href="editstudent.php?id=' . htmlspecialchars($row['id']) . '">Edit</a>
                 <a href="studentrecord.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
+                <a href="archive.php?id=' . htmlspecialchars($row['id']) . '">Archive</a>
             </td>
         </tr>';
 }
 
 $content .= '
-    </table>';
+    </table>
+    <a href="print.php">Print Records</a> | 
+    <a href="archivedstudents.php">View Archived Students</a>';
 
 // Include the admin layout
 include 'admin_layout.php';

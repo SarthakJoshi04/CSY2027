@@ -17,8 +17,9 @@ class DatabaseConnection {
     private function connect() {
         try {
             $this->connection = new PDO('mysql:dbname=' . $this->databasename . ';host=' . $this->servername, $this->username, $this->password);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->connection->exec("set names utf8");
         } catch (PDOException $e) {
-            // Handle connection errors (you can add logging or error messages here)
             echo "Connection failed: " . $e->getMessage();
         }
     }

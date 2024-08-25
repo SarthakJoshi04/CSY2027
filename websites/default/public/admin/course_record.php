@@ -1,3 +1,5 @@
+<!-- course_record.php -->
+
 <?php
 // Include database connection
 include '../dbconnection.php';

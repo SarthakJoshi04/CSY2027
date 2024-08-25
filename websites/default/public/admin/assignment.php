@@ -1,3 +1,5 @@
+<!-- assignment.php -->
+
 <?php
 // Include database connection
 include '../dbconnection.php';
