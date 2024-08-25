@@ -19,7 +19,7 @@ $content = '
         <p class="description">ENGAGE IN OUR TRANSFORMATIVE PROGRAMS, DEVELOP YOUR EXPERTISE, AND THRIVE IN A GLOBAL SOCIETY</p>
         </div>
     </div>
-
+    <hr>
 
 
     <!--Second content about the university-->
@@ -44,7 +44,7 @@ $content = '
             <div class="uni-picture-content"></div>
         </div>
     </div> 
-
+        <hr>
 
 
     <!--Academics div-->
@@ -64,7 +64,7 @@ $content = '
       <button class="academics-button">ACADEMICS</button>
    </div>
    </div> 
-
+    <hr>
 
 
 
@@ -84,7 +84,7 @@ $content = '
             <div class="faculty-picture-content"></div>
         </div>
     </div> 
-
+        <hr>
     
     <!--Students div-->
     <div class="students-page">
@@ -98,7 +98,7 @@ $content = '
         </div>
     </div> 
 
-
+    <hr>
     <!--Contact div-->
     <div class="contact-section">
       <p>Have questions or need assistance? Our dedicated team is here to help. Reach out to us anytime, and we\'ll provide the support you need.</p>
