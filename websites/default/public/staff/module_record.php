@@ -146,7 +146,7 @@ foreach ($modules as $row) {
 $content .= '
         </table>
         <div class="button-group">
-            <a href="printmodule.php" class="button">Print Records</a>
+            <a href="../admin/printmodule.php" class="button">Print Records</a>
     
         </div>
     </div>

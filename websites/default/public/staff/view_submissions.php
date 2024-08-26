@@ -8,10 +8,6 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // Check if the user is logged in and is a student
-if (!isset($_SESSION['username'])) {
-    header('Location: student_login.php'); // Redirect to login page if not logged in
-    exit();
-}
 
 // Create a database connection
 $db = new DatabaseConnection();

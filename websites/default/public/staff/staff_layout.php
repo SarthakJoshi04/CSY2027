@@ -71,7 +71,7 @@ $activePage = basename($_SERVER['PHP_SELF']);
             <li class="<?php echo $activePage == 'assignment.php' ? 'active' : ''; ?>">
                 <a href="assignment.php">Assignments</a>
             </li>
-            <li class="<?php echo $activePage == 'assignment.php' ? 'active' : ''; ?>">
+            <li class="<?php echo $activePage == 'view_submissions.php' ? 'active' : ''; ?>">
                 <a href="view_submissions.php">Submissions</a>
             </li>
             

@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Password is correct, login successful
         $_SESSION['user_id'] = $user['id']; // Store user ID in session
         $_SESSION['username'] = $user['username']; // Store username in session
-        header("Location: /student/student_layout.php"); // Redirect to student_layout.php
+        header("Location: /student/mycourse.php"); // Redirect to student_layout.php
         exit();
     } else {
         // Authentication failed
