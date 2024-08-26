@@ -1,5 +1,5 @@
 <?php
-// academics.php
+// index.php
 $pageTitle = "Home";
 $content = '
     <!--Image-->
