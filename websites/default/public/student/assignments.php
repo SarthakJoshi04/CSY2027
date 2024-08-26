@@ -28,15 +28,7 @@ $pageTitle = "Assignments";
 
 ob_start();
 ?>
-<!-- Include student_layout.php -->
-<?php include 'student_layout.php'; ?>
 
-<div class="main-content">
-    <header class="student-header">
-        <h1>Assignments</h1>
-    </header>
-
-    <main>
         <h2>Assignments</h2>
         <?php if (!empty($assignments)): ?>
             <ul>
@@ -54,12 +46,11 @@ ob_start();
         <?php else: ?>
             <p>No assignments found.</p>
         <?php endif; ?>
-    </main>
-</div>
+
 
 <?php
 $content = ob_get_clean();
+include 'student_layout.php';
 ?>
 
-<!-- Output the content from the buffer -->
-<?php echo $content; ?>
+

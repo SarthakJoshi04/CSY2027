@@ -67,7 +67,7 @@ $activePage = basename($_SERVER['PHP_SELF']);
                 <a href="assignment.php">Assignments</a>
             </li>
            
-            <li><a href="../index.php">Logout</a></li>
+            <li><a href="../logout.php">Logout</a></li>
         </ul>
     </div>
 

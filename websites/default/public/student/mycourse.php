@@ -9,7 +9,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // Check if the user is logged in and is a student
 if (!isset($_SESSION['username'])) {
-    header('Location: student_login.php'); // Redirect to login page if not logged in
+    header('Location: ../student_login.php'); // Redirect to login page if not logged in
     exit();
 }
 
@@ -47,38 +47,26 @@ $modules = $stmtModules->fetchAll(PDO::FETCH_ASSOC);
 // Set page title
 $pageTitle = "My Courses";
 
+// Start output buffering
 ob_start();
 ?>
-<!-- Include student_layout.php -->
-<?php include 'student_layout.php'; ?>
-
-<div class="main-content">
-    <header class="student-header">
-        <h1>My Courses</h1>
-    </header>
-
-    <main>
-        <h2>Courses</h2>
-        <?php if (!empty($courses)): ?>
-            <ul>
-                <?php foreach ($courses as $course): ?>
-                    <li>
-                        <h3><?php echo htmlspecialchars($course['course_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                        <p><?php echo htmlspecialchars($course['description'], ENT_QUOTES, 'UTF-8'); ?></p>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php else: ?>
-            <p>No courses found.</p>
-        <?php endif; ?>
-
-       
-    </main>
-</div>
-
+<h2>Courses</h2>
+<?php if (!empty($courses)): ?>
+    <ul>
+        <?php foreach ($courses as $course): ?>
+            <li>
+                <h3><?php echo htmlspecialchars($course['course_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                <p><?php echo htmlspecialchars($course['description'], ENT_QUOTES, 'UTF-8'); ?></p>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php else: ?>
+    <p>No courses found.</p>
+<?php endif; ?>
 <?php
+// Capture the output
 $content = ob_get_clean();
-?>
 
-<!-- Output the content from the buffer -->
-<?php echo $content; ?>
+// Include the layout file
+include 'student_layout.php';
+?>

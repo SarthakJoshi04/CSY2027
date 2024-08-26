@@ -602,8 +602,8 @@ footer {
 
 .sidebar-header {
     background-color: #B6B69D;
-    padding: 50px;
-    text-align: right;
+    padding: 50px 0px 50px 0px;
+    
 }
 
 .sidebar-header h2 {
@@ -611,6 +611,11 @@ footer {
     font-size: 2.5em;
     color: #483E26;
     padding-left: 30%;
+}
+
+.sidebar-header .studentheader{
+
+    padding-left: 15%;
 }
 
 .sidebar-menu {
