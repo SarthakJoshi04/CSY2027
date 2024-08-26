@@ -1,6 +1,7 @@
-<!-- staffrecord.php -->
-
 <?php
+// Start output buffering
+ob_start();
+
 // Include database connection
 include '../dbconnection.php';
 
@@ -14,7 +15,7 @@ if (isset($_POST['create'])) {
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     $query = "INSERT INTO staff (firstname, lastname, email, username, password) VALUES (:firstname, :lastname, :email, :username, :password)";
     $stmt = $conn->prepare($query);
@@ -33,7 +34,7 @@ if (isset($_POST['update'])) {
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     $query = "UPDATE staff SET firstname = :firstname, lastname = :lastname, email = :email, username = :username, password = :password WHERE id = :id";
     $stmt = $conn->prepare($query);
@@ -44,6 +45,10 @@ if (isset($_POST['update'])) {
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':password', $password);
     $stmt->execute();
+    
+    // Redirect after update
+    header('Location: staffrecord.php');
+    exit();
 }
 
 // Handle Delete
@@ -54,51 +59,182 @@ if (isset($_GET['delete'])) {
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':id', $id);
     $stmt->execute();
+    
+    // Redirect after delete
+    header('Location: staffrecord.php');
+    exit();
 }
 
-// Fetch staff
+// Fetch staff records
 $query = "SELECT * FROM staff";
 $stmt = $conn->prepare($query);
 $stmt->execute();
-$staff = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$staffs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch staff details for AJAX request
+if (isset($_GET['staff_id'])) {
+    $id = $_GET['staff_id'];
+    $query = "SELECT * FROM staff WHERE id = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $staff = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    echo json_encode($staff);
+    exit();
+}
 
 // Set the content for this page
 $content = '
-    <h1>Staff Records</h1>
-    <form method="POST">
-        <input type="text" name="firstname" placeholder="First Name" required>
-        <input type="text" name="lastname" placeholder="Last Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit" name="create">Add Staff</button>
-    </form>
-    <table>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Actions</th>
-        </tr>';
+    <div class="table-container">
+        <h1 class="table-title">Staff</h1>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Actions</th>
+            </tr>';
 
-foreach ($staff as $row) {
+foreach ($staffs as $row) {
     $content .= '
-        <tr>
-            <td>' . htmlspecialchars($row['firstname']) . '</td>
-            <td>' . htmlspecialchars($row['lastname']) . '</td>
-            <td>' . htmlspecialchars($row['email']) . '</td>
-            <td>' . htmlspecialchars($row['username']) . '</td>
-            <td>
-                <a href="staffrecord.php?edit=' . htmlspecialchars($row['id']) . '">Edit</a>
-                <a href="staffrecord.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
-            </td>
-        </tr>';
+            <tr>
+                <td>' . htmlspecialchars($row['firstname']) . '</td>
+                <td>' . htmlspecialchars($row['lastname']) . '</td>
+                <td>' . htmlspecialchars($row['email']) . '</td>
+                <td>' . htmlspecialchars($row['username']) . '</td>
+                <td>
+                    <button onclick="openEditDialog(' . htmlspecialchars($row['id']) . ')">Edit</button>
+                    <a href="staffrecord.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
+                </td>
+            </tr>';
 }
 
-$content .= '
-    </table>';
+// Set the content for this page
+$content = <<<HTML
+    <div class="table-container">
+        <h1 class="table-title">Staff</h1>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Actions</th>
+            </tr>
+HTML;
+
+foreach ($staffs as $row) {
+    $content .= <<<HTML
+            <tr>
+                <td>{$row['firstname']}</td>
+                <td>{$row['lastname']}</td>
+                <td>{$row['email']}</td>
+                <td>{$row['username']}</td>
+                <td>
+                    <button onclick="openEditDialog({$row['id']})">Edit</button>
+                    <a href="staffrecord.php?delete={$row['id']}">Delete</a>
+                </td>
+            </tr>
+HTML;
+}
+
+$content .= <<<HTML
+        </table>
+        <div class="button-group">
+            <button id="addStaffBtn" class="button">Add Staff</button>
+        </div>
+    </div>
+
+    <!-- Add Staff Dialog -->
+    <div id="addStaffDialog" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddDialog()">&times;</span>
+            <h1>Add New Staff</h1>
+            <form id="addStaffForm" method="POST">
+                <input type="text" name="firstname" placeholder="First Name" required>
+                <input type="text" name="lastname" placeholder="Last Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" name="create">Add Staff</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Staff Dialog -->
+    <div id="editStaffDialog" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditDialog()">&times;</span>
+            <h1>Edit Staff</h1>
+            <form id="editStaffForm" method="POST">
+                <input type="hidden" name="id" id="editStaffId">
+                <input type="text" name="firstname" id="editFirstName" placeholder="First Name" required>
+                <input type="text" name="lastname" id="editLastName" placeholder="Last Name" required>
+                <input type="email" name="email" id="editEmail" placeholder="Email" required>
+                <input type="text" name="username" id="editUsername" placeholder="Username" required>
+                <input type="password" name="password" id="editPassword" placeholder="Password" required>
+                <button type="submit" name="update">Update Staff</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        var addModal = document.getElementById("addStaffDialog");
+        var editModal = document.getElementById("editStaffDialog");
+        var addBtn = document.getElementById("addStaffBtn");
+        var closeAdd = document.getElementsByClassName("close")[0];
+        var closeEdit = document.getElementsByClassName("close")[1];
+
+        addBtn.onclick = function() {
+            addModal.style.display = "block";
+        }
+
+        closeAdd.onclick = function() {
+            addModal.style.display = "none";
+        }
+
+        closeEdit.onclick = function() {
+            editModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == addModal) {
+                addModal.style.display = "none";
+            }
+            if (event.target == editModal) {
+                editModal.style.display = "none";
+            }
+        }
+
+        function openEditDialog(id) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "staffrecord.php?staff_id=" + id, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var staff = JSON.parse(xhr.responseText);
+                    if (staff.error) {
+                        alert(staff.error);
+                        return;
+                    }
+                    document.getElementById("editStaffId").value = staff.id;
+                    document.getElementById("editFirstName").value = staff.firstname;
+                    document.getElementById("editLastName").value = staff.lastname;
+                    document.getElementById("editEmail").value = staff.email;
+                    document.getElementById("editUsername").value = staff.username;
+                    document.getElementById("editPassword").value = '';
+                    editModal.style.display = "block";
+                }
+            };
+            xhr.send();
+        }
+    </script>
+HTML;
 
 // Include the admin layout
 include 'admin_layout.php';
-?>
+
+// End output buffering and flush output
+ob_end_flush();

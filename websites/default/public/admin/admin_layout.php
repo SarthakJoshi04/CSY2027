@@ -47,6 +47,7 @@ $activePage = basename($_SERVER['PHP_SELF']);
         <div class="sidebar-header">
             <h2>ADMIN</h2>
         </div>
+        
         <ul class="sidebar-menu">
             <li class="<?php echo $activePage == 'studentrecord.php' ? 'active' : ''; ?>">
                 <a href="studentrecord.php">Student Record</a>
@@ -63,24 +64,27 @@ $activePage = basename($_SERVER['PHP_SELF']);
             <li class="<?php echo $activePage == 'assignment.php' ? 'active' : ''; ?>">
                 <a href="assignment.php">Assignments</a>
             </li>
-            <li class="<?php echo $activePage == 'attendance.php' ? 'active' : ''; ?>">
-                <a href="attendance.php">Attendance</a>
-            </li>
+           
             <li><a href="../index.php">Logout</a></li>
         </ul>
     </div>
 
     <div class="main-content">
         <header class="admin-header">
+
+            
             <h1><?php echo $pageTitle; ?></h1>
-            <div class="admin_logo">
-                <img src="../images/Uni-logo.png" alt="Woodland University College Logo">
-            </div>
+
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Search...">
                 <button id="searchButton">Search</button>
                 <ul id="suggestions"></ul>
             </div>
+            
+            <div class="admin_logo">
+                <img src="../images/Uni-logo.png" alt="Woodland University College Logo">
+            </div>
+            
         </header>
 
         <!-- Main content area -->
