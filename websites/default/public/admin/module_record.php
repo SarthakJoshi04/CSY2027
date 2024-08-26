@@ -73,8 +73,32 @@ if (isset($_GET['delete'])) {
     exit();
 }
 
+// Handle Archive
+if (isset($_GET['archive'])) {
+    $id = $_GET['archive'];
+
+    // Check if ID exists
+    $query = "SELECT COUNT(*) FROM modules WHERE id = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    if ($stmt->fetchColumn() == 0) {
+        echo 'Module not found.';
+        exit();
+    }
+
+    $query = "UPDATE modules SET is_archived = 1 WHERE id = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    
+    // Redirect after archive
+    header('Location: module_record.php');
+    exit();
+}
+
 // Fetch modules with course names
-$query = "SELECT m.*, c.course_name FROM modules m JOIN courses c ON m.course_id = c.id";
+$query = "SELECT m.*, c.course_name FROM modules m JOIN courses c ON m.course_id = c.id WHERE m.is_archived = 0";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -117,8 +141,8 @@ foreach ($modules as $row) {
                 <td>' . htmlspecialchars($row['description']) . '</td>
                 <td>' . htmlspecialchars($row['course_name']) . '</td>
                 <td>
-                    <button onclick="openEditDialog(' . htmlspecialchars($row['id']) . ')">Edit</button>
-                    <a href="module_record.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
+                     <button class="button" onclick="openEditDialog(' . htmlspecialchars($row['id']) . ')">Edit</button>
+                     <a class="button" href="module_record.php?archive=' . htmlspecialchars($row['id']) . '">Archive</a>
                 </td>
             </tr>';
 }
@@ -127,6 +151,9 @@ $content .= '
         </table>
         <div class="button-group">
             <button id="addModuleBtn" class="button">Add Module</button>
+            <a href="printmodule.php" class="button">Print Records</a>
+            <a href="archivedmodules.php" class="button">View Archived Modules</a>
+    
         </div>
     </div>
 

@@ -7,7 +7,7 @@ $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
 // Fetch student records
-$query = "SELECT firstname, lastname, email, username FROM students";
+$query = "SELECT firstname, lastname, email, username FROM staff";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -19,7 +19,7 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
-    <title>Print Student Records</title>
+    <title>Print staff Records</title>
     <style>
         @media print {
             body {
@@ -50,7 +50,7 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </style>
 </head>
 <body onload="window.print()">
-    <h1>Student Records</h1>
+    <h1>Staff Records</h1>
     <table>
         <tr>
             <th>First Name</th>

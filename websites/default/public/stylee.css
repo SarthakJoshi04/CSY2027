@@ -1272,7 +1272,6 @@ textarea.input-field {
     z-index: 1; /* Place above stubbler */
 }
 
-<<<<<<< Updated upstream
 
 /*Styling for academics page*/
 .whole-div{
@@ -1450,7 +1449,7 @@ textarea.input-field {
 .facul-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-=======
+}
 /* Search button admin ko css */
 /* Search Container */
 .search-container {
@@ -1619,5 +1618,4 @@ form button {
     color: white;
     border: none;
     cursor: pointer;
->>>>>>> Stashed changes
 }

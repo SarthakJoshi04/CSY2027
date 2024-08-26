@@ -9,34 +9,32 @@ include '../dbconnection.php';
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
-// Fetch archived students
-$query = "SELECT * FROM students WHERE is_archived = 1";
+// Fetch archived modules
+$query = "SELECT m.*, c.course_name FROM modules m JOIN courses c ON m.course_id = c.id WHERE m.is_archived = 1";
 $stmt = $conn->prepare($query);
 $stmt->execute();
-$archivedStudents = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$archivedModules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Set the content for this page
 $content = '
     <div class="table-container">
-        <h1 class="table-title">Archived Students</h1>
+        <h1 class="table-title">Archived Modules</h1>
         <table>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Username</th>
+                <th>Module Name</th>
+                <th>Description</th>
+                <th>Course Name</th>
                 <th>Actions</th>
             </tr>';
 
-foreach ($archivedStudents as $row) {
+foreach ($archivedModules as $row) {
     $content .= '
             <tr>
-                <td>' . htmlspecialchars($row['firstname']) . '</td>
-                <td>' . htmlspecialchars($row['lastname']) . '</td>
-                <td>' . htmlspecialchars($row['email']) . '</td>
-                <td>' . htmlspecialchars($row['username']) . '</td>
+                <td>' . htmlspecialchars($row['module_name']) . '</td>
+                <td>' . htmlspecialchars($row['description']) . '</td>
+                <td>' . htmlspecialchars($row['course_name']) . '</td>
                 <td>
-                    <a href="restore.php?id=' . htmlspecialchars($row['id']) . '&type=student" class="button">Restore</a>
+                    <a href="restore.php?id=' . htmlspecialchars($row['id']) . '&type=module" class="button">Restore</a>
                     <a href="permanentdelete.php?id=' . htmlspecialchars($row['id']) . '" class="button">Delete Permanently</a>
                 </td>
             </tr>';
@@ -45,7 +43,7 @@ foreach ($archivedStudents as $row) {
 $content .= '
         </table>
         <div class="button-group">
-            <a href="studentrecord.php" class="button">Back to Student Records</a>
+            <a href="module_record.php" class="button">Back to Modules</a>
         </div>
     </div>';
 

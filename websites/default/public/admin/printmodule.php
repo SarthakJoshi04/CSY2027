@@ -7,7 +7,7 @@ $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
 // Fetch student records
-$query = "SELECT firstname, lastname, email, username FROM students";
+$query = "SELECT module_name, description, course_id FROM modules";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -53,17 +53,16 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h1>Student Records</h1>
     <table>
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Username</th>
+            <th>Modules</th>
+            <th>Description</th>
+            <th>Course ID</th>
+            
         </tr>
         <?php foreach ($students as $row): ?>
         <tr>
-            <td><?php echo htmlspecialchars($row['firstname']); ?></td>
-            <td><?php echo htmlspecialchars($row['lastname']); ?></td>
-            <td><?php echo htmlspecialchars($row['email']); ?></td>
-            <td><?php echo htmlspecialchars($row['username']); ?></td>
+            <td><?php echo htmlspecialchars($row['module_name']); ?></td>
+            <td><?php echo htmlspecialchars($row['description']); ?></td>
+            <td><?php echo htmlspecialchars($row['course_id']); ?></td>
         </tr>
         <?php endforeach; ?>
     </table>

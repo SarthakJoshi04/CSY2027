@@ -61,8 +61,22 @@ if (isset($_GET['delete'])) {
     $stmt->execute();
 }
 
+// Handle Archive
+if (isset($_GET['archive'])) {
+    $id = $_GET['archive'];
+
+    $query = "UPDATE courses SET is_archived = 1 WHERE id = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+
+    // Refresh the page to show updated records
+    header('Location: course_record.php');
+    exit();
+}
+
 // Fetch courses
-$query = "SELECT * FROM courses";
+$query = "SELECT * FROM courses WHERE is_archived = 0"; // Exclude archived courses
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -84,8 +98,9 @@ foreach ($courses as $row) {
                 <td>' . htmlspecialchars($row['course_name']) . '</td>
                 <td>' . htmlspecialchars($row['description']) . '</td>
                 <td>
-                    <button onclick="openEditDialog(' . htmlspecialchars($row['id']) . ')">Edit</button>
-                    <a href="course_record.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
+                    <button class="button" onclick="openEditDialog(' . htmlspecialchars($row['id']) . ')">Edit</button>
+                    <a class="button" href="course_record.php?archive=' . htmlspecialchars($row['id']) . '">Archive</a>
+                    <a class="button" href="course_record.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
                 </td>
             </tr>';
 }
@@ -94,6 +109,8 @@ $content .= '
         </table>
         <div class="button-group">
             <button id="addCourseBtn" class="button">Add Course</button>
+            <a href="printcourse.php" class="button">Print Records</a>
+            <a href="archivedcourses.php" class="button">View Archived Courses</a>
         </div>
     </div>
 

@@ -7,7 +7,7 @@ $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
 // Fetch student records
-$query = "SELECT firstname, lastname, email, username FROM students";
+$query = "SELECT course_name,description FROM courses";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -19,7 +19,7 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
-    <title>Print Student Records</title>
+    <title>Print Courses</title>
     <style>
         @media print {
             body {
@@ -50,20 +50,17 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </style>
 </head>
 <body onload="window.print()">
-    <h1>Student Records</h1>
+    <h1>Courses</h1>
     <table>
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Username</th>
+            <th>Courses</th>
+            <th>Description</th>
         </tr>
         <?php foreach ($students as $row): ?>
         <tr>
-            <td><?php echo htmlspecialchars($row['firstname']); ?></td>
-            <td><?php echo htmlspecialchars($row['lastname']); ?></td>
-            <td><?php echo htmlspecialchars($row['email']); ?></td>
-            <td><?php echo htmlspecialchars($row['username']); ?></td>
+            <td><?php echo htmlspecialchars($row['course_name']); ?></td>
+            <td><?php echo htmlspecialchars($row['description']); ?></td>
+            
         </tr>
         <?php endforeach; ?>
     </table>

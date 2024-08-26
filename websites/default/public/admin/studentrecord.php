@@ -105,9 +105,9 @@ foreach ($students as $row) {
                 <td>' . htmlspecialchars($row['email']) . '</td>
                 <td>' . htmlspecialchars($row['username']) . '</td>
                 <td>
-                    <button onclick="openEditDialog(' . htmlspecialchars($row['id']) . ')">Edit</button>
-                    <a href="studentrecord.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
-                    <a href="archive.php?id=' . htmlspecialchars($row['id']) . '">Archive</a>
+                    <button class="button" onclick="openEditDialog(' . htmlspecialchars($row['id']) . ')">Edit</button>
+                    <a class="button" href="studentrecord.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
+                    <a class="button" href="archive.php?id=' . htmlspecialchars($row['id']) . '">Archive</a>
                 </td>
             </tr>';
 }
@@ -117,7 +117,7 @@ $content .= '
         <div class="button-group">
             <button id="addStudentBtn" class="button">Add Student</button>
             <a href="archivedstudents.php" class="button">View Archived Students</a>
-            <a href="print.php" class="button">Print Records</a>
+            <a href="print.php" class="button">Print Students</a>
         </div>
     </div>
 

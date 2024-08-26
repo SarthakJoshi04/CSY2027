@@ -65,8 +65,22 @@ if (isset($_GET['delete'])) {
     exit();
 }
 
+// Handle Archive
+if (isset($_GET['archive'])) {
+    $id = $_GET['archive'];
+
+    $query = "UPDATE staff SET is_archived = 1 WHERE id = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    
+    // Redirect after archiving
+    header('Location: staffrecord.php');
+    exit();
+}
+
 // Fetch staff records
-$query = "SELECT * FROM staff";
+$query = "SELECT * FROM staff WHERE is_archived = 0";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $staffs = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -82,33 +96,6 @@ if (isset($_GET['staff_id'])) {
     
     echo json_encode($staff);
     exit();
-}
-
-// Set the content for this page
-$content = '
-    <div class="table-container">
-        <h1 class="table-title">Staff</h1>
-        <table>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Username</th>
-                <th>Actions</th>
-            </tr>';
-
-foreach ($staffs as $row) {
-    $content .= '
-            <tr>
-                <td>' . htmlspecialchars($row['firstname']) . '</td>
-                <td>' . htmlspecialchars($row['lastname']) . '</td>
-                <td>' . htmlspecialchars($row['email']) . '</td>
-                <td>' . htmlspecialchars($row['username']) . '</td>
-                <td>
-                    <button onclick="openEditDialog(' . htmlspecialchars($row['id']) . ')">Edit</button>
-                    <a href="staffrecord.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
-                </td>
-            </tr>';
 }
 
 // Set the content for this page
@@ -133,8 +120,9 @@ foreach ($staffs as $row) {
                 <td>{$row['email']}</td>
                 <td>{$row['username']}</td>
                 <td>
-                    <button onclick="openEditDialog({$row['id']})">Edit</button>
-                    <a href="staffrecord.php?delete={$row['id']}">Delete</a>
+                    <button class="button" onclick="openEditDialog({$row['id']})">Edit</button>
+                    <a class="button" href="staffrecord.php?delete={$row['id']}">Delete</a>
+                    <a class="button" href="staffrecord.php?archive={$row['id']}">Archive</a>
                 </td>
             </tr>
 HTML;
@@ -144,6 +132,8 @@ $content .= <<<HTML
         </table>
         <div class="button-group">
             <button id="addStaffBtn" class="button">Add Staff</button>
+            <a href="printstaff.php" class="button">Print Records</a>
+            <a href="archivedstaff.php" class="button">View Archived Staff</a>
         </div>
     </div>
 
