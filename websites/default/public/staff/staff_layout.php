@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+// Check if the user is logged in and has the role 'staff'
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'staff') {
+    header('Location: /staff/staff_login.php'); // Redirect to staff login if not logged in
+    exit();
+}
+
+
 $pageTitle = "Dashboard";
 $activePage = basename($_SERVER['PHP_SELF']);
 ?>

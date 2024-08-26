@@ -1,5 +1,7 @@
-<!-- admin_layout.php -->
 <?php
+
+
+
 $pageTitle = "Dashboard";
 $activePage = basename($_SERVER['PHP_SELF']);
 ?>

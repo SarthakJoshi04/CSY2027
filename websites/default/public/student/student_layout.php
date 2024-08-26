@@ -2,7 +2,7 @@
 
 // Check if the user is logged in and is a student
 if (!isset($_SESSION['username'])) {
-    header('Location: student_login.php'); // Redirect to login page if not logged in
+    header('Location: ../student_login.php'); // Redirect to login page if not logged in
     exit();
 }
 

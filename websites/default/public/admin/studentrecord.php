@@ -1,4 +1,5 @@
 <?php
+
 // Start output buffering
 ob_start();
 
@@ -9,6 +10,18 @@ include '../dbconnection.php';
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
+// Fetch available courses
+$queryCourses = "SELECT * FROM courses WHERE is_archived = 0";
+$stmtCourses = $conn->prepare($queryCourses);
+$stmtCourses->execute();
+$courses = $stmtCourses->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch available modules
+$queryModules = "SELECT * FROM modules WHERE is_archived = 0";
+$stmtModules = $conn->prepare($queryModules);
+$stmtModules->execute();
+$modules = $stmtModules->fetchAll(PDO::FETCH_ASSOC);
+
 // Handle Create
 if (isset($_POST['create'])) {
     $firstname = $_POST['firstname'];
@@ -16,14 +29,18 @@ if (isset($_POST['create'])) {
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $course_id = $_POST['course_id'];
+    $module_id = $_POST['module_id'];
 
-    $query = "INSERT INTO students (firstname, lastname, email, username, password) VALUES (:firstname, :lastname, :email, :username, :password)";
+    $query = "INSERT INTO students (firstname, lastname, email, username, password, course_id, module_id) VALUES (:firstname, :lastname, :email, :username, :password, :course_id, :module_id)";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':firstname', $firstname);
     $stmt->bindParam(':lastname', $lastname);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':course_id', $course_id);
+    $stmt->bindParam(':module_id', $module_id);
     $stmt->execute();
 }
 
@@ -35,8 +52,10 @@ if (isset($_POST['update'])) {
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $course_id = $_POST['course_id'];
+    $module_id = $_POST['module_id'];
 
-    $query = "UPDATE students SET firstname = :firstname, lastname = :lastname, email = :email, username = :username, password = :password WHERE id = :id";
+    $query = "UPDATE students SET firstname = :firstname, lastname = :lastname, email = :email, username = :username, password = :password, course_id = :course_id, module_id = :module_id WHERE id = :id";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':id', $id);
     $stmt->bindParam(':firstname', $firstname);
@@ -44,6 +63,8 @@ if (isset($_POST['update'])) {
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':course_id', $course_id);
+    $stmt->bindParam(':module_id', $module_id);
     $stmt->execute();
     
     // Redirect after update
@@ -66,7 +87,10 @@ if (isset($_GET['delete'])) {
 }
 
 // Fetch students
-$query = "SELECT * FROM students WHERE is_archived = 0";
+$query = "SELECT students.*, courses.course_name, modules.module_name FROM students 
+          LEFT JOIN courses ON students.course_id = courses.id 
+          LEFT JOIN modules ON students.module_id = modules.id 
+          WHERE students.is_archived = 0";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -94,6 +118,8 @@ $content = '
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Username</th>
+                <th>Course</th>
+                <th>Module</th>
                 <th>Actions</th>
             </tr>';
 
@@ -104,10 +130,12 @@ foreach ($students as $row) {
                 <td>' . htmlspecialchars($row['lastname']) . '</td>
                 <td>' . htmlspecialchars($row['email']) . '</td>
                 <td>' . htmlspecialchars($row['username']) . '</td>
+                <td>' . htmlspecialchars($row['course_name']) . '</td>
+                <td>' . htmlspecialchars($row['module_name']) . '</td>
                 <td>
-                    <button class="button" onclick="openEditDialog(' . htmlspecialchars($row['id']) . ')">Edit</button>
-                    <a class="button" href="studentrecord.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
-                    <a class="button" href="archive.php?id=' . htmlspecialchars($row['id']) . '">Archive</a>
+                    <button onclick="openEditDialog(' . htmlspecialchars($row['id']) . ')">Edit</button>
+                    <a href="studentrecord.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
+                    <a href="archive.php?id=' . htmlspecialchars($row['id']) . '">Archive</a>
                 </td>
             </tr>';
 }
@@ -117,7 +145,7 @@ $content .= '
         <div class="button-group">
             <button id="addStudentBtn" class="button">Add Student</button>
             <a href="archivedstudents.php" class="button">View Archived Students</a>
-            <a href="print.php" class="button">Print Students</a>
+            <a href="print.php" class="button">Print Records</a>
         </div>
     </div>
 
@@ -132,6 +160,24 @@ $content .= '
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required>
+                <select name="course_id" required>
+                    <option value="">Select Course</option>';
+
+foreach ($courses as $course) {
+    $content .= '<option value="' . htmlspecialchars($course['id']) . '">' . htmlspecialchars($course['course_name']) . '</option>';
+}
+
+$content .= '
+                </select>
+                <select name="module_id" required>
+                    <option value="">Select Module</option>';
+
+foreach ($modules as $module) {
+    $content .= '<option value="' . htmlspecialchars($module['id']) . '">' . htmlspecialchars($module['module_name']) . '</option>';
+}
+
+$content .= '
+                </select>
                 <button type="submit" name="create">Add Student</button>
             </form>
         </div>
@@ -149,64 +195,66 @@ $content .= '
                 <input type="email" name="email" id="editEmail" placeholder="Email" required>
                 <input type="text" name="username" id="editUsername" placeholder="Username" required>
                 <input type="password" name="password" id="editPassword" placeholder="Password" required>
+                <select name="course_id" id="editCourseId" required>
+                    <option value="">Select Course</option>';
+
+foreach ($courses as $course) {
+    $content .= '<option value="' . htmlspecialchars($course['id']) . '">' . htmlspecialchars($course['course_name']) . '</option>';
+}
+
+$content .= '
+                </select>
+                <select name="module_id" id="editModuleId" required>
+                    <option value="">Select Module</option>';
+
+foreach ($modules as $module) {
+    $content .= '<option value="' . htmlspecialchars($module['id']) . '">' . htmlspecialchars($module['module_name']) . '</option>';
+}
+
+$content .= '
+                </select>
                 <button type="submit" name="update">Update Student</button>
             </form>
         </div>
     </div>
-
-    <!-- JavaScript -->
-    <script>
-        var addModal = document.getElementById("addStudentDialog");
-        var editModal = document.getElementById("editStudentDialog");
-        var addBtn = document.getElementById("addStudentBtn");
-        var closeAdd = document.getElementsByClassName("close")[0];
-        var closeEdit = document.getElementsByClassName("close")[1];
-
-        addBtn.onclick = function() {
-            addModal.style.display = "block";
-        }
-
-        closeAdd.onclick = function() {
-            addModal.style.display = "none";
-        }
-
-        closeEdit.onclick = function() {
-            editModal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == addModal) {
-                addModal.style.display = "none";
-            }
-            if (event.target == editModal) {
-                editModal.style.display = "none";
-            }
-        }
-
-        function openEditDialog(id) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "studentrecord.php?student_id=" + id, true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    var student = JSON.parse(xhr.responseText);
-                    if (student.error) {
-                        alert(student.error);
-                        return;
-                    }
-                    document.getElementById("editStudentId").value = student.id;
-                    document.getElementById("editFirstName").value = student.firstname;
-                    document.getElementById("editLastName").value = student.lastname;
-                    document.getElementById("editEmail").value = student.email;
-                    document.getElementById("editUsername").value = student.username;
-                    document.getElementById("editPassword").value = student.password;
-                    editModal.style.display = "block";
-                }
-            };
-            xhr.send();
-        }
-    </script>
 ';
 
-// Include the admin layout
 include 'admin_layout.php';
 ?>
+
+<script>
+document.getElementById('addStudentBtn').addEventListener('click', openAddDialog);
+
+function openAddDialog() {
+    document.getElementById('addStudentDialog').style.display = 'block';
+}
+
+function closeAddDialog() {
+    document.getElementById('addStudentDialog').style.display = 'none';
+}
+
+function openEditDialog(id) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'studentrecord.php?student_id=' + id, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var student = JSON.parse(xhr.responseText);
+            document.getElementById('editStudentId').value = student.id;
+            document.getElementById('editFirstName').value = student.firstname;
+            document.getElementById('editLastName').value = student.lastname;
+            document.getElementById('editEmail').value = student.email;
+            document.getElementById('editUsername').value = student.username;
+            document.getElementById('editPassword').value = '';
+            document.getElementById('editCourseId').value = student.course_id;
+            document.getElementById('editModuleId').value = student.module_id;
+            document.getElementById('editStudentDialog').style.display = 'block';
+        }
+    };
+    xhr.send();
+}
+
+function closeEditDialog() {
+    document.getElementById('editStudentDialog').style.display = 'none';
+}
+</script>
+
