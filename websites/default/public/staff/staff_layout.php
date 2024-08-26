@@ -1,4 +1,3 @@
-<!-- admin_layout.php -->
 <?php
 $pageTitle = "Dashboard";
 $activePage = basename($_SERVER['PHP_SELF']);
@@ -48,8 +47,8 @@ $activePage = basename($_SERVER['PHP_SELF']);
             <h2>STAFF</h2>
         </div>
         <ul class="sidebar-menu">
-            <li class="<?php echo $activePage == 'studentrecord.php' ? 'active' : ''; ?>">
-                <a href="studentrecord.php">Student Record</a>
+            <li class="<?php echo $activePage == '../admin/studentrecord.php' ? 'active' : ''; ?>">
+                <a href='../admin/studentrecord.php'>Student Record</a>
             </li>
             <li class="<?php echo $activePage == 'staffrecord.php' ? 'active' : ''; ?>">
                 <a href="staffrecord.php">Staff Record</a>
