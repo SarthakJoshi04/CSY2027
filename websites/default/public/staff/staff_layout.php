@@ -59,11 +59,9 @@ $activePage = basename($_SERVER['PHP_SELF']);
         </div>
         <ul class="sidebar-menu">
             <li class="<?php echo $activePage == '../admin/studentrecord.php' ? 'active' : ''; ?>">
-                <a href='../admin/studentrecord.php'>Student Record</a>
+                <a href='../staff/studentrecord.php'>Student Record</a>
             </li>
-            <li class="<?php echo $activePage == 'staffrecord.php' ? 'active' : ''; ?>">
-                <a href="staffrecord.php">Staff Record</a>
-            </li>
+           
             <li class="<?php echo $activePage == 'course_record.php' ? 'active' : ''; ?>">
                 <a href="course_record.php">Course Record</a>
             </li>
@@ -73,9 +71,7 @@ $activePage = basename($_SERVER['PHP_SELF']);
             <li class="<?php echo $activePage == 'assignment.php' ? 'active' : ''; ?>">
                 <a href="assignment.php">Assignments</a>
             </li>
-            <li class="<?php echo $activePage == 'attendance.php' ? 'active' : ''; ?>">
-                <a href="attendance.php">Attendance</a>
-            </li>
+            
             <li><a href="../index.php">Logout</a></li>
         </ul>
     </div>
