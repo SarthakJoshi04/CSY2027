@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Start the session only if it hasn't been started
+}
 
 // Check if the user is logged in and has the role 'staff'
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'staff') {

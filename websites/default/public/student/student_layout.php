@@ -1,4 +1,7 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Start the session only if it hasn't been started
+}
 
 // Check if the user is logged in and is a student
 if (!isset($_SESSION['username'])) {
@@ -39,7 +42,7 @@ $activePage = basename($_SERVER['PHP_SELF']);
                 <a href="grades.php">Grades</a>
             </li>
            
-            <li><a href="../index.php">Logout</a></li>
+            <li><a href="../logout.php">Logout</a></li>
         </ul>
     </div>
 

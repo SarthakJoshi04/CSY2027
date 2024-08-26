@@ -1,7 +1,10 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Start the session only if it hasn't been started
+} // Start the session
+include 'dbconnection.php'; 
 
-
-include 'dbconnection.php'; // Include the database connection file
+ // Include the database connection file
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -27,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Password is correct, login successful
         $_SESSION['user_id'] = $user['id']; // Store user ID in session
         $_SESSION['username'] = $user['username']; // Store username in session
-        header("Location: /student/mycourse.php"); // Redirect to student_layout.php
+        header("Location: /student/student_layout.php"); // Redirect to student_layout.php
         exit();
     } else {
         // Authentication failed
