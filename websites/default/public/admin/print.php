@@ -7,7 +7,7 @@ $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
 // Fetch student records
-$query = "SELECT firstname, lastname, email, username FROM students";
+$query = "SELECT id, firstname, lastname, email, username, password, is_archived, course_id, module_id, date_of_birth, gender, contact, address, parents FROM students";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -53,17 +53,35 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h1>Student Records</h1>
     <table>
         <tr>
+            
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
             <th>Username</th>
+            
+            
+           
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th>Parents</th>
         </tr>
         <?php foreach ($students as $row): ?>
         <tr>
+            
             <td><?php echo htmlspecialchars($row['firstname']); ?></td>
             <td><?php echo htmlspecialchars($row['lastname']); ?></td>
             <td><?php echo htmlspecialchars($row['email']); ?></td>
             <td><?php echo htmlspecialchars($row['username']); ?></td>
+            
+            
+            
+            <td><?php echo htmlspecialchars($row['date_of_birth']); ?></td>
+            <td><?php echo htmlspecialchars($row['gender']); ?></td>
+            <td><?php echo htmlspecialchars($row['contact']); ?></td>
+            <td><?php echo htmlspecialchars($row['address']); ?></td>
+            <td><?php echo htmlspecialchars($row['parents']); ?></td>
         </tr>
         <?php endforeach; ?>
     </table>

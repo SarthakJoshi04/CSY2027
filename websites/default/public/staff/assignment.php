@@ -153,7 +153,7 @@ foreach ($assignments as $row) {
                 <td>' . $course_name . '</td>
                 <td>' . ($file_path ? '<a href="../uploads/' . $file_path . '" target="_blank">View File</a>' : 'No File') . '</td>
                 <td>
-                    <button onclick="openEditDialog(' . htmlspecialchars($row['id']) . ')">Edit</button>
+                    
                     <a href="assignment.php?delete=' . htmlspecialchars($row['id']) . '">Delete</a>
                 </td>
             </tr>';

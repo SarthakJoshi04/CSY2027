@@ -2,36 +2,31 @@
 // Include the database connection
 require_once '../dbconnection.php';
 
-// Start the session
+// Start the session if not already started
 if (session_status() == PHP_SESSION_NONE) {
-    session_start(); // Start the session only if it hasn't been started
+    session_start();
 }
-
-// Check if the user is logged in and is a student
 
 // Create a database connection
 $db = new DatabaseConnection();
 $pdo = $db->getConnection();
 
-// Fetch submissions for the logged-in student
-$student_id = $_SESSION['user_id']; // Assuming you store the student ID in the session
+// Fetch all submissions
 $sqlSubmissions = "SELECT s.*, a.title AS assignment_title, CONCAT(st.firstname, ' ', st.lastname) AS student_name 
                     FROM submissions s
                     JOIN assignments a ON s.assignment_id = a.id
-                    JOIN students st ON s.student_id = st.id
-                    WHERE s.student_id = :student_id";
+                    JOIN students st ON s.student_id = st.id";
 $stmtSubmissions = $pdo->prepare($sqlSubmissions);
-$stmtSubmissions->bindParam(':student_id', $student_id);
 $stmtSubmissions->execute();
 $submissions = $stmtSubmissions->fetchAll(PDO::FETCH_ASSOC);
 
 // Set page title
-$pageTitle = "My Submissions";
+$pageTitle = "All Submissions";
 
 ob_start();
 ?>
 
-<h2>My Submissions</h2>
+<h2>All Submissions</h2>
 <?php if (!empty($submissions)): ?>
     <table>
         <tr>
