@@ -194,7 +194,6 @@ $content .= '
                 <input type="text" name="lastname" id="editLastName" placeholder="Last Name" required>
                 <input type="email" name="email" id="editEmail" placeholder="Email" required>
                 <input type="text" name="username" id="editUsername" placeholder="Username" required>
-                <input type="password" name="password" id="editPassword" placeholder="Password" required>
                 <select name="course_id" id="editCourseId" required>
                     <option value="">Select Course</option>';
 
@@ -244,7 +243,6 @@ function openEditDialog(id) {
             document.getElementById('editLastName').value = student.lastname;
             document.getElementById('editEmail').value = student.email;
             document.getElementById('editUsername').value = student.username;
-            document.getElementById('editPassword').value = '';
             document.getElementById('editCourseId').value = student.course_id;
             document.getElementById('editModuleId').value = student.module_id;
             document.getElementById('editStudentDialog').style.display = 'block';

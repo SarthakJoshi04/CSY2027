@@ -1044,7 +1044,7 @@ footer {
 }
 
 .contact-form {
-    background: rgba(0, 0, 0, 0.7);
+    background-color: #483E26;
     color: white;
     padding: 50px;
     flex: 1;
