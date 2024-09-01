@@ -43,7 +43,7 @@ button{
 }
 .nav__links li a{
     text-decoration: none;
-    color: #000; /* Adjust the color as per your theme */
+    color: #000;
     
     padding: 10px;
     position: relative;
@@ -60,34 +60,29 @@ nav ul li a:hover::after {
     bottom: 0;
     width: 100%;
     height: 2px;
-    background-color: #3a2c1a; /* Adjust the underline color as needed */
+    background-color: #3a2c1a; 
     transition: all 3s ease;
 }
 
 
 
-
-/* Active State with Triangle Facing Right */
 nav ul li.active a::after {
     content: '';
     position: absolute;
-    left: -10px; /* Positioning on the left side */
+    left: -10px; 
     top: 50%;
     transform: translateY(-50%);
     width: 0;
     height: 0;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-left: 10px solid #3a2c1a; /* Color of the triangle */
+    border-left: 10px solid #3a2c1a;
 }
 
-/* Positioning Adjustment for Active Link */
+
 nav ul li.active a {
     position: relative;
 }
-
-
-
 
 
 button {
@@ -156,12 +151,12 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    width: 350px; /* Adjust the width to fit both sections side by side */
+    width: 350px; 
     font-size: 16px;
 }
 
 .contact-info {
-    margin-right: 30px; /* Space between contact info and socials */
+    margin-right: 30px;
 }
 
 .footer-right p {
@@ -213,45 +208,45 @@ footer {
     margin-bottom: 10px;
 }
 
-/* student login */
+
 
 .login_body {
     background-color: #E5E5CB;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Align containers to the left */
+    justify-content: flex-start; 
     height: 100vh;
     margin: 0;
-    padding-left: 20px; /* Padding for space on the left */
+    padding-left: 20px;
     font-family: Arial, sans-serif;
 }
 
 .right-container {
     margin-left: 90px;
-    margin-right: 190px; /* Space on the right */
+    margin-right: 190px; 
     height: 50vh;
     width: 25%;
     position: relative;
-    margin-top: -30px; /* Adjusted margin to pull upwards */
+    margin-top: -30px;
 }
 
 .stubbler {
     background-color: #D5CEA3;
     padding: 20px;
-    height: 100%; /* Full height */
-    width: 92%; /* Full width */
+    height: 100%; 
+    width: 92%; 
     position: absolute;
     right: -37px;
     top: 40px;
 }
 
 .right-content {
-    background: url('images/student.png') no-repeat center center; /* Image background */
-    background-size: cover; /* Cover the entire div */
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    background: url('images/student.png') no-repeat center center; 
+    background-size: cover;
+    width: 100%; 
+    height: 100%; 
     position: relative;
-    z-index: 1; /* Place above stubbler */
+    z-index: 1; 
 }
 
 .login-container {
@@ -267,8 +262,8 @@ footer {
     background-color: #3C2A21;
     padding: 20px;
     border-radius: 35px;
-    height: 110%; /* Full height */
-    width: 92%; /* Full width */
+    height: 110%; 
+    width: 92%;
     position: absolute;
     right: -37px;
     top: 20px;
@@ -279,21 +274,21 @@ footer {
     padding: 30px;
     border-radius: 35px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 110%; /* Full height */
-    width: 100%; /* Full width */
-    z-index: 1; /* Place on top */
+    height: 110%; 
+    width: 100%; 
+    z-index: 1;
 }
 
 .login-form h2 {
-    margin: 0 0 25px; /* Space below h2 */
+    margin: 0 0 25px;
     color: #333;
     text-align: center;
 }
 
 .login-form input {
     width: 90%;
-    padding: 15px; /* More height */
-    margin: 10px 5px 20px 5px; /* Space below input boxes */
+    padding: 15px; 
+    margin: 10px 5px 20px 5px;
     border: none;
     border-radius: 30px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -302,7 +297,7 @@ footer {
 
 .login-form button {
     width: 50%;
-    padding: 25px; /* More height */
+    padding: 25px;
     background-color: #4A403A;
     color: #FFF;
     border: none;
@@ -310,7 +305,7 @@ footer {
     left: 80px;
     border-radius: 40px;
     cursor: pointer;
-    font-size: 0.8em; /* Reduced font size */
+    font-size: 0.8em;
     margin-top: 30px;
 }
 
@@ -350,10 +345,10 @@ footer {
     background-color: #E5E5CB;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Align containers to the left */
+    justify-content: flex-start;
     height: 100vh;
     margin: 0;
-    padding-left: 20px; /* Padding for space on the left */
+    padding-left: 20px; 
     font-family: Arial, sans-serif;
   }
   
@@ -361,19 +356,19 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 150px; /* Space on the left */
+    margin-left: 150px; 
     height: 50vh;
     width: 25%;
     position: relative;
-    margin-top: -30px; /* Adjusted margin to pull upwards */
+    margin-top: -30px; 
   }
   
   .stubble-staff {
     background-color: #3C2A21;
     padding: 20px;
     border-radius: 35px;
-    height: 110%; /* Full height */
-    width: 92%; /* Full width */
+    height: 110%; 
+    width: 92%; 
     position: absolute;
     right: -37px;
     top: 20px;
@@ -384,13 +379,13 @@ footer {
     padding: 10px;
     border-radius: 35px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 110%; /* Full height */
-    width: 100%; /* Full width */
-    z-index: 1; /* Place on top */
+    height: 110%;
+    width: 100%; 
+    z-index: 1;
   }
   
   .login-form-staff h2 {
-    margin: 0 0 25px; /* Space below h2 */
+    margin: 0 0 25px; 
     color: #333;
     text-align: center;
   }
@@ -576,18 +571,18 @@ footer {
 }
 
 .contact-section p {
-    font-size: 34px; /* Increase the size of the text */
-    font-weight: bold; /* Make the text bold */
-    letter-spacing: 2.5px; /* Increase letter spacing */
+    font-size: 34px; 
+    font-weight: bold; 
+    letter-spacing: 2.5px; 
 }
 
 .contact-button {
     background-color: #D5CEA3;
     color: black;
-    padding: 25px 30px; /* Increase the size of the button */
+    padding: 25px 30px; 
     height: fit-content;
-    font-size: 15px; /* Increase the text size on the button */
-    letter-spacing: 1.5px; /* Increase letter spacing */
+    font-size: 15px; 
+    letter-spacing: 1.5px; 
     border: none;
     bottom: -390%;
     left: 40%;;
@@ -605,30 +600,30 @@ footer {
 
 .academics-container {
     margin-left: 10px;
-    margin-right: 190px; /* Space on the right */
+    margin-right: 190px; 
     height: 50vh;
     width: 30%;
     position: relative;
-    margin-top: -30px; /* Adjusted margin to pull upwards */
+    margin-top: -30px; 
 }
 
 .picture-content {
     background-color: #D5CEA3;
     padding: 20px;
-    height: 70%; /* Full height */
-    width: 105%; /* Full width */
+    height: 70%; 
+    width: 105%; 
     position: absolute;
     right: -83px;
     top: 40px;
 }
 
 .picture-box {
-    background: url('images/joshua-hoehne-iggWDxHTAUQ-unsplash.jpg') no-repeat center center; /* Image background */
-    background-size: cover; /* Cover the entire div */
-    width: 110%; /* Full width */
-    height: 70%; /* Full height */
+    background: url('images/joshua-hoehne-iggWDxHTAUQ-unsplash.jpg') no-repeat center center; 
+    background-size: cover; 
+    width: 110%;
+    height: 70%; 
     position: relative;
-    z-index: 1; /* Place above stubbler */
+    z-index: 1; 
 }
 
 .academics-text{
@@ -638,16 +633,16 @@ footer {
 }
 
 .academics-text p{
-    font-size: 30px; /* Increase the size of the text */
-    letter-spacing: 1.5px; /* Increase letter spacing */
+    font-size: 30px; 
+    letter-spacing: 1.5px; 
 }
 .academics-button {
     background-color: #D5CEA3;
     color: black;
-    padding: 25px 30px; /* Increase the size of the button */
+    padding: 25px 30px; 
     height: fit-content;
     font-size: 15px; /* Increase the text size on the button */
-    letter-spacing: 1.5px; /* Increase letter spacing */
+    letter-spacing: 1.5px; 
     border: none;
     bottom:-125%;
     left: 40%;;
@@ -666,18 +661,18 @@ footer {
 
 .students-container {
     margin-left: -30px;
-    margin-right: 200px; /* Space on the right */
+    margin-right: 200px; 
     height: 50vh;
     width: 25%;
     position: relative;
-    margin-top: -30px; /* Adjusted margin to pull upwards */
+    margin-top: -30px; 
 }
 
 .students-content {
     background-color: #D5CEA3;
     padding: 20px;
-    height: 70%; /* Full height */
-    width: 138%; /* Full width */
+    height: 70%; 
+    width: 138%; 
     position: absolute;
     right: -158px;
     top: 38px;
@@ -685,11 +680,11 @@ footer {
 
 .students-picture {
     background: url('images/mikael-kristenson-3aVlWP-7bg8-unsplash.jpg') no-repeat center center; /* Image background */
-    background-size: cover; /* Cover the entire div */
-    width: 140%; /* Full width */
-    height: 70%; /* Full height */
+    background-size: cover; 
+    width: 140%; 
+    height: 70%; 
     position: relative;
-    z-index: 1; /* Place above stubbler */
+    z-index: 1; 
 }
 
 .students-text{
@@ -699,16 +694,16 @@ footer {
 }
 
 .students-text p{
-    font-size: 28px; /* Increase the size of the text */
-    letter-spacing: 1px; /* Increase letter spacing */
+    font-size: 28px; 
+    letter-spacing: 1px; 
 }
 .students-button {
     background-color: #D5CEA3;
     color: black;
-    padding: 25px 30px; /* Increase the size of the button */
+    padding: 25px 30px; 
     height: fit-content;
-    font-size: 15px; /* Increase the text size on the button */
-    letter-spacing: 1.5px; /* Increase letter spacing */
+    font-size: 15px; 
+    letter-spacing: 1.5px; 
     border: none;
     bottom:-125%;
     left: 40%;;
@@ -727,16 +722,16 @@ footer {
 .faculty-text {
     position: absolute;
     text-align: left;
-    left: 5%; /* Moved closer to the left */
+    left: 5%; 
     bottom:-195%;
-    width: 40%; /* Contracted the text container */
+    width: 40%; 
 }
 
 .faculty-text p {
-    font-size: 24px; /* Reduced the size of the text */
+    font-size: 24px;
     color: #D5CEA3;
-    letter-spacing: 1.2px; /* Slightly reduced letter spacing */
-    line-height: 1.5; /* Added line height for better readability */
+    letter-spacing: 1.2px;
+    line-height: 1.5;
 }
 
 .faculty-container {
@@ -745,14 +740,14 @@ footer {
     height: 50vh;
     width: 25%;
     position: relative;
-    margin-top: -30px; /* Adjusted margin to pull upwards */
+    margin-top: -30px; 
 }
 
 .faculty-picture-content {
     background-color: black;
     padding: 20px;
-    height: 70%; /* Full height */
-    width: 135%; /* Full width */
+    height: 70%; 
+    width: 135%; 
     position: absolute;
     right: -157px;
     top: 40px;
@@ -760,20 +755,20 @@ footer {
 
 .faculty-picture-box {
     background: url('images/pang-yuhao-_kd5cxwZOK4-unsplash.jpg') no-repeat center center; /* Image background */
-    background-size: cover; /* Cover the entire div */
-    width: 140%; /* Full width */
-    height: 70%; /* Full height */
+    background-size: cover;
+    width: 140%; 
+    height: 70%; 
     position: relative;
-    z-index: 1; /* Place above stubbler */
+    z-index: 1; 
 }
 
 .faculty-button {
     background-color: black;
     color: #D5CEA3;
-    padding: 25px 30px; /* Increase the size of the button */
+    padding: 25px 30px; 
     height: fit-content;
-    font-size: 15px; /* Increase the text size on the button */
-    letter-spacing: 1.5px; /* Increase letter spacing */
+    font-size: 15px; 
+    letter-spacing: 1.5px; 
     border: none;
     bottom: -125%;
     left: 40%;
@@ -790,7 +785,7 @@ footer {
 .hero-section {
     position: relative;
     width: 100%;
-    height: 70vh; /* Reduced height to pull the image upwards */
+    height: 70vh; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -802,11 +797,11 @@ footer {
     height: 100%;
     object-fit: cover;
     position: absolute;
-    top: -10vh; /* Pulls the image upwards */
+    top: -10vh; 
 }
 
 .text-content {
-    position: absolute; /* Changed from absolute to relative */
+    position: absolute; 
     text-align: center;
     font-size: larger;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, sans-serif;
@@ -856,7 +851,7 @@ footer {
 }
 
 .content-section {
-    padding: 4em 2em; /* Add padding to create space between sections */
+    padding: 4em 2em;
     text-align: center;
 }
 
@@ -869,8 +864,7 @@ footer {
     font-size: 1.2em;
     margin-bottom: 1.5em;
 }
-/*Styling of uni page*/
-/* Styling for faculty page */
+
 .uni-page {
     padding: 135px;
     background-color: #E5E5CB;
@@ -879,25 +873,25 @@ footer {
 .uni-text {
     position: absolute;
     text-align: left;
-    left: 5%; /* Moved closer to the left */
+    left: 5%; 
     top: 113%;
-    width: 40%; /* Contracted the text container */
+    width: 40%; 
 }
 
 .uni-text p {
-    font-size: 20px; /* Reduced the size of the text */
+    font-size: 20px; 
     color: black;
-    letter-spacing: 1.2px; /* Slightly reduced letter spacing */
-    line-height: 1.5; /* Added line height for better readability */
+    letter-spacing: 1.2px; 
+    line-height: 1.5; 
 }
 
 .apply-button{
     background-color: #D5CEA3;
     color: black;
-    padding: 25px 30px; /* Increase the size of the button */
+    padding: 25px 30px; 
     height: fit-content;
-    font-size: 15px; /* Increase the text size on the button */
-    letter-spacing: 1.5px; /* Increase letter spacing */
+    font-size: 15px; 
+    letter-spacing: 1.5px; 
     border: none;
     top:125%;
     left: 25%;;
@@ -912,14 +906,14 @@ footer {
     height: 50vh;
     width: 25%;
     position: relative;
-    margin-top: -30px; /* Adjusted margin to pull upwards */
+    margin-top: -30px; 
 }
 
 .uni-picture-content {
     background-color:#D5CEA3;
     padding: 20px;
-    height: 85%; /* Full height */
-    width: 135%; /* Full width */
+    height: 85%;
+    width: 135%; 
     position: absolute;
     right: -160px;
     top: 50px;
@@ -927,11 +921,11 @@ footer {
 
 .uni-picture-box {
     background: url('images/vadim-sherbakov-d6ebY-faOO0-unsplash.jpg') no-repeat center center; /* Image background */
-    background-size: cover; /* Cover the entire div */
-    width: 140%; /* Full width */
-    height: 90%; /* Full height */
+    background-size: cover; 
+    width: 140%; 
+    height: 90%;
     position: relative;
-    z-index: 1; /* Place above stubbler */
+    z-index: 1; 
 }
 /*styling contact page*/
 .container {
@@ -974,7 +968,7 @@ footer {
 
 textarea.input-field {
     height: 100px;
-    resize: none; /* Prevents the textarea from being resized */
+    resize: none; 
 }
 
 .submit-btn {
@@ -989,7 +983,7 @@ textarea.input-field {
 
 .image-section {
     background: #E5E5CB url('/Images/pexels-markus-winkler-1430818-18536259.jpg') no-repeat center center;
-    background-size: cover; /* This will ensure the image covers the entire section */
+    background-size: cover;
     flex: 1;
     display: flex;
     justify-content: center;
@@ -1005,7 +999,7 @@ textarea.input-field {
 .hero-section-students {
     position: relative;
     width: 100%;
-    height: 70vh; /* Reduced height to pull the image upwards */
+    height: 70vh; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1017,11 +1011,11 @@ textarea.input-field {
     height: 100%;
     object-fit: cover;
     position: absolute;
-    top: -10vh; /* Pulls the image upwards */
+    top: -10vh; 
 }
 
 .text-content-students {
-    position: absolute; /* Changed from absolute to relative */
+    position: absolute;
     text-align: center;
     font-size: larger;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, sans-serif;
@@ -1073,16 +1067,16 @@ textarea.input-field {
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 59px; /* Increased spacing between images */
+    gap: 59px; 
     padding: 20px;
-    max-width: 1100px; /* Slightly decreased the maximum width */
+    max-width: 1100px; 
     margin: 0 auto;
 }
 
 .grid-item {
     position: relative;
     overflow: hidden;
-    width: 95%; /* Slightly decreased the width of each grid item */
+    width: 95%; 
 }
 
 .grid-item img {
@@ -1133,16 +1127,16 @@ textarea.input-field {
 .student-text-para {
     position: absolute;
     text-align: left;
-    left: 5%; /* Moved closer to the left */
+    left: 5%; 
     bottom:-75%;
-    width: 40%; /* Contracted the text container */
+    width: 40%; 
 }
 
 .student-text-para p {
-    font-size: 19px; /* Reduced the size of the text */
+    font-size: 19px; 
     color: #D5CEA3;
-    letter-spacing: 1px; /* Slightly reduced letter spacing */
-    line-height: 1.5; /* Added line height for better readability */
+    letter-spacing: 1px; 
+    line-height: 1.5; 
 }
 
 .para-container {
@@ -1151,14 +1145,14 @@ textarea.input-field {
     height: 50vh;
     width: 25%;
     position: relative;
-    margin-top: -30px; /* Adjusted margin to pull upwards */
+    margin-top: -30px; 
 }
 
 .para-picture-content {
     background-color: black;
     padding: 20px;
-    height: 70%; /* Full height */
-    width: 105%; /* Full width */
+    height: 70%; 
+    width: 105%; 
     position: absolute;
     right: -87px;
     top: 40px;
@@ -1166,11 +1160,11 @@ textarea.input-field {
 
 .para-picture-box {
     background: url('images/pexels-expressivestanley-1454360.jpg') no-repeat center center; /* Image background */
-    background-size: cover; /* Cover the entire div */
-    width: 110%; /* Full width */
-    height: 70%; /* Full height */
+    background-size: cover; 
+    width: 110%; 
+    height: 70%; 
     position: relative;
-    z-index: 1; /* Place above stubbler */
+    z-index: 1; 
 }
 
 
@@ -1202,7 +1196,7 @@ textarea.input-field {
 .academic-image-container {
     position: relative;
     width: 100%;
-    height: 70vh; /* Reduced height to pull the image upwards */
+    height: 70vh; ;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1214,7 +1208,7 @@ textarea.input-field {
     height: 100%;
     object-fit: cover;
     position: absolute;
-    top: -10vh; /* Pulls the image upwards */
+    top: -10vh; ;
 }
 
 .study-options-academics {
@@ -1290,9 +1284,9 @@ textarea.input-field {
 }
 
 .bottom-section p {
-    font-size: 34px; /* Increase the size of the text */
-    font-weight: bold; /* Make the text bold */
-    letter-spacing: 2.5px; /* Increase letter spacing */
+    font-size: 34px; 
+    font-weight: bold; 
+    letter-spacing: 2.5px; 
 }
 
 /*Faculty Styling*/
@@ -1351,7 +1345,7 @@ textarea.input-field {
     transform: translateY(-10px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-/* Search button admin ko css */
+
 /* Search Container */
 .search-container {
     width: 100%;
@@ -1359,27 +1353,27 @@ textarea.input-field {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Added position relative for the container */
+    position: relative; 
 }
 
 /* Search Input Field */
 #searchInput {
-    width: 300px; /* Adjust width as needed */
+    width: 300px; 
     padding: 10px;
-    border: 2px solid #3A2A1D; /* Border color similar to the table */
+    border: 2px solid #3A2A1D; 
     border-radius: 20px 0 0 20px;
     font-size: 16px;
-    background-color: #F9F7E9; /* Light background matching table rows */
-    color: #3A2A1D; /* Dark text color */
+    background-color: #F9F7E9; 
+    color: #3A2A1D; 
 }
 
 /* Search Button */
 #searchButton {
-    padding: 15px 20px; /* Padding inside the button */
-    border: 2px solid #3A2A1D; /* Matching border */
+    padding: 15px 20px; 
+    border: 2px solid #3A2A1D; 
     border-radius: 0 20px 20px 0;
-    background-color: #3A2A1D; /* Dark brown background */
-    color: #F9F7E9; /* Light text color */
+    background-color: #3A2A1D; 
+    color: #F9F7E9; 
     font-size: 16px;
     cursor: pointer;
     font-weight: bold;
@@ -1387,18 +1381,18 @@ textarea.input-field {
 }
 
 #searchButton:hover {
-    background-color: #D4B88D; /* Slightly lighter on hover */
-    border-color: #D4B88D; /* Border color change on hover */
+    background-color: #D4B88D; 
+    border-color: #D4B88D; 
 }
 
 
-/* Admin Page ko student ko record */
+
 
 /* Table Container */
 .table-container {
     width: 100%;
     padding: 20px;
-    background-color: #695839; /* Light background for the table */
+    background-color: #695839; 
     border-radius: 15px;
 }
 
@@ -1419,30 +1413,30 @@ table {
 
 /* Table Header */
 th {
-    background-color: #3A2A1D; /* Dark brown background */
-    color: #F9F7E9;            /* Light text color */
+    background-color: #3A2A1D; 
+    color: #F9F7E9;            
     padding: 15px;
     text-align: left;
 }
 
 /* Table Rows */
 td {
-    background-color: #F9F7E9; /* Light background for rows */
+    background-color: #F9F7E9; 
     padding: 15px;
-    border: 1px solid #3A2A1D; /* Border for rows */
+    border: 1px solid #3A2A1D; 
     text-align: left;
 }
 
 /* Actions Links */
 td a {
-    color: #3A2A1D; /* Dark text color for actions */
+    color: #3A2A1D;
     text-decoration: none;
     font-weight: bold;
     margin-right: 10px;
 }
 
 td a:hover {
-    text-decoration: underline; /* Underline on hover */
+    text-decoration: underline; 
 }
 
 /* Button Group */
@@ -1453,8 +1447,8 @@ td a:hover {
 
 /* Buttons */
 .button {
-    background-color: #E9D9B1; /* Match background color */
-    color: #3A2A1D;            /* Dark text color */
+    background-color: #E9D9B1; 
+    color: #3A2A1D;            
     padding: 10px 20px;
     margin: 5px;
     border-radius: 20px;
@@ -1463,7 +1457,7 @@ td a:hover {
 }
 
 .button:hover {
-    background-color: #D4B88D; /* Slightly darker on hover */
+    background-color: #D4B88D; 
 }
 
 
@@ -1483,12 +1477,12 @@ td a:hover {
 /* Modal Content */
 .modal-content {
     background-color: #fefefe;
-    margin: 10% auto; /* Center the modal */
+    margin: 10% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 400px; /* Fixed width for square-like appearance */
-    max-width: 90%; /* Responsive max width */
-    border-radius: 8px; /* Rounded corners */
+    width: 400px; 
+    max-width: 90%; 
+    border-radius: 8px; 
 }
 
 /* Close Button */
