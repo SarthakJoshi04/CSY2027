@@ -1,9 +1,2 @@
 # CSY2027 Software Engineering Group Project Assignment
-### Group Name: SPD
-### Members:
-- Divash Paudel
-- Pranish Chapagain
-- Pratish Kalika
-- Pratyush Neupane
-- Sarthak Man Joshi
-- Shuvasis Nepal
+Developing a software suite for an educational institution (Woodland University College) to replace their existing traditional clerical methods of record management.
